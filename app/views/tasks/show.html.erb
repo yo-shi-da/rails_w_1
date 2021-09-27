@@ -1,13 +1,12 @@
 <p>
-  <strong>Name:</strong>
+  <strong>Name(名称):</strong>
   <%= @task.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Description(詳細):</strong>
   <%= @task.description %>
 </p>
 
 <%= link_to '編集', edit_task_path(@task) %> |
-<%= link_to '戻る', tasks_path %>
 <%= link_to '戻る', tasks_path %>
