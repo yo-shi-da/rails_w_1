@@ -4,12 +4,16 @@
     <title>Work1</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <% if flash.notice.present? %>
+      <p class="alert alert-success" role="alert"><%= flash.notice %></p>
+  　<% end %>
     <%= yield %>
   </body>
 </html>
