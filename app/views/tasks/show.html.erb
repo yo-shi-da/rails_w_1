@@ -1,2 +1,12 @@
-<h1>Tasks#show</h1>
-<p>Find me in app/views/tasks/show.html.erb</p>
+<p>
+  <strong>Name(名称):</strong>
+  <%= @task.name %>
+</p>
+
+<p>
+  <strong>Description(詳細):</strong>
+  <%= @task.description %>
+</p>
+
+<%= link_to '編集', edit_task_path(@task) %> |
+<%= link_to '戻る', tasks_path %>
