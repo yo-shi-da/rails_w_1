@@ -22,6 +22,14 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content 'task'
       end
     end
+    
+    context 'タスクが作成日時の降順に並んでいる場合' do
+      it '新しいタスクが一番上に表示される' do
+        task = FactoryBot.create(:task, name: '名称')
+        visit tasks_path
+        expect(all('tbody tr')[0]).to have_content '名称'
+      end
+    end
   end
 
   describe '詳細表示機能' do
