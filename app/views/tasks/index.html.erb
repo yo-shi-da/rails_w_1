@@ -1,5 +1,16 @@
 <h1>タスク一覧</h1>
 
+
+<%= form_with url: tasks_path, method: :get, local: true do |form| %>
+  <div class='form-group', class='row'>
+    <%= form.label :name_cont, '検索ボックス', class: 'col-sm2 col-form-label' %>
+    <%= form.text_field :search, class: 'form-control' %>
+    <%= form.submit '検索', name: nil, class: 'btn btn-outline-primary' %>
+  </div>
+<% end %>
+
+<br>
+
 <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true"), class:"btn btn-primary" %>
 
 <div class="mb-3">
@@ -9,7 +20,7 @@
       <th>No(sequence number)</th>
       <th>Name(名前)</th>
       <th>Description（詳細）</th>
-      <th>Created_at（終了期限）</th>
+      <th>Expired_at（終了期限）</th>
       <th>Created_at(登録日時）</th>
       <th>Status(ステータス)</th>
       <th>Priority(優先度)</th>
