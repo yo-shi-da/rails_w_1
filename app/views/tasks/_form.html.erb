@@ -14,12 +14,12 @@
 
   <div class="field">
     <%= form.label :name, "タスク名" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :description, "詳細" %>
-    <%= form.text_field :description %>
+    <%= form.text_area :description, class: 'form-control' %>
   </div>
 
   <div class="field">
