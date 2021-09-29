@@ -13,13 +13,28 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, "タスク名" %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label :description, "詳細" %>
     <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expired_at, "終了期限" %>
+    <%= form.datetime_field :expired_at %>
+  </div>
+
+    <div class="field">
+    <%= form.label :status, "ステータス" %>
+    <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]] %>
+  </div>
+
+    <div class="field">
+    <%= form.label :priority, "優先度" %>
+    <%= form.select :priority, [["高", "高"], ["中", "中"], ["小", "小"]] %>
   </div>
 
   <div class="actions">

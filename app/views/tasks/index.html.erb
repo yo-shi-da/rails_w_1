@@ -3,9 +3,13 @@
 <table>
   <thead>
     <tr>
+      <th>No(sequence number)</th>
       <th>Name(名前)</th>
       <th>Description（詳細）</th>
-      <th>Created_at（作成日時）</th>
+      <th>Created_at（終了期限）</th>
+      <th>Created_at(登録日時）</th>
+      <th>Status(ステータス)</th>
+      <th>Priority(優先度)</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,12 +18,16 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
+        <td><%= task.id %></td>
         <td><%= task.name %></td>
         <td><%= task.description %></td>
-        <td><%= task.created_at %></td>
-        <td><%= link_to '詳細', task %></td>
-        <td><%= link_to '編集', edit_task_path(task) %></td>
-        <td><%= link_to '削除', task, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+        <td><%= task.expired_at.strftime("%Y年%m月%d日") %></td>
+        <td><%= task.created_at.strftime("%Y年%m月%d日") %></td>
+        <td><%= task.status %></td>
+        <td><%= task.priority %></td>
+        <td><%= link_to '詳細', task, class:"btn btn-outline-primary" %></td>
+        <td><%= link_to '編集', edit_task_path(task), class:"btn btn-outline-success" %></td>
+        <td><%= link_to '削除', task, class:"btn btn-outline-danger", method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -27,4 +35,4 @@
 
 <br>
 
-<%= link_to '新規作成', new_task_path %>
+<%= link_to '新規作成', new_task_path, class:"btn btn-primary" %>
