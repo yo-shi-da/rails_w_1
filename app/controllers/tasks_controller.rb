@@ -1,23 +1,23 @@
 class TasksController < ApplicationController
 
   def index
+    
+    @tasks = Task.all.order(id: :asc)
 
     if params[:sort_expired].present?
       @tasks = Task.sort_expired(:sort_expired)
-    else
-      # @tasks = Task.all.order(id: :asc)
     end
 
     if params[:search].present?
-      @tasks = @tasks.where('name LIKE ?', "%#{params[:search]}%") 
-    else
-      # @tasks = Task.all    
+      @tasks = Task.where('name LIKE ?', "%#{params[:search]}%") 
+    end
+
+    if params[:status].present?
+      @tasks = Task.where(status: params[:status]) 
     end
 
     if params[:sort_priority].present?
       @tasks = Task.sort_priority(:sort_priority)
-    else
-      # @tasks = Task.all.order(id: :asc)
     end
     
   end
