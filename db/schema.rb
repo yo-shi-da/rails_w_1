@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 2021_09_29_042004) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "expired_at"
-    t.string "status"
-    t.string "priority"
+    t.integer "status"
+    t.integer "priority"
   end
 
 end

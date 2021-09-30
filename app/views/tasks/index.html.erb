@@ -11,6 +11,15 @@
 
 <br>
 
+<%
+=begin%>
+ <%= form_with model: @hoge do |f| %>
+  <%= f.select :task, options_for_select(Task.status), {prompt: "選択してください"} %>
+  <%= f.submit '送信'%>
+<% end %> 
+<%
+=end%>
+
 <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true"), class:"btn btn-primary" %>
 
 <div class="mb-3">

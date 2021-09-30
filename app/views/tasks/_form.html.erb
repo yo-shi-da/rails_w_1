@@ -27,15 +27,16 @@
     <%= form.datetime_field :expired_at %>
   </div>
 
-    <div class="field">
+  <div class="field">
     <%= form.label :status, "ステータス" %>
-    <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]] %>
+    <%= form.select :status, Task.statuses.keys %>
   </div>
 
-    <div class="field">
+   <div class="field">
     <%= form.label :priority, "優先度" %>
-    <%= form.select :priority, [["高", "高"], ["中", "中"], ["小", "小"]] %>
-  </div>
+    <%= form.select :priority, Task.priorities.keys %>
+  </div> 
+
 
   <div class="actions">
     <%= form.submit %>
