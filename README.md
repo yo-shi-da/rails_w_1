@@ -37,29 +37,29 @@
 # herokuへのデプロイ方法
 
 1.ログインする  
-heroku login  
+>heroku login  
 
 2.新しいアプリケーションを作成  
-heroku create
+>heroku create
 
 3.アセットプリコンパイルをする  
-rails assets:precompile RAILS_ENV=production
+>rails assets:precompile RAILS_ENV=production
 
 4.bunderのバージョンのlock解除する。(環境によっては不要)  
-bundle lock --add-platform x86_64-linux
+>bundle lock --add-platform x86_64-linux
 
 5.ステージする  
-git add -A  
+>git add -A  
 
 6.コミットする  
-git commit -m "コメント"
+>git commit -m "コメント"
 
 7.Heroku buildpackを追加する  
-heroku buildpacks:set heroku/ruby  
-heroku buildpacks:add --index 1 heroku/nodejs
+>heroku buildpacks:set heroku/ruby  
+>heroku buildpacks:add --index 1 heroku/nodejs
 
 8.デプロイする  
-git push heroku master
+>git push heroku master
 
 9.マイグレーション実行  
-heroku run rails db:migrate
+>heroku run rails db:migrate

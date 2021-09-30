@@ -74,3 +74,20 @@ end
 # else
 #   @tasks = Task.all.order(id: :desc)
 # end
+
+# <%= form_with url: tasks_path, scope: :task, method: :get, local: true do |form| %>
+#   <div class='form-group', class='row'>
+#     <%= form.label :name_cont, '検索ボックス', class: 'col-sm2 col-form-label' %>
+#     <%= form.text_field :search, class: 'form-control' %>
+#     <%= form.submit '検索', name: nil, class: 'btn btn-outline-primary' %>
+#   </div>
+# <% end %>
+
+# <br>
+
+# <%= form_with url: tasks_path, scope: :task, method: :get, local: true do |form| %>
+#   <div class='form-group', class='row'>
+#     <%= form.select :status, Task.statuses.keys, class: 'form-control' %>
+#     <%= form.submit 'ステータス検索', name: nil, class: 'btn btn-outline-primary' %>
+#   </div>
+# <% end %>
