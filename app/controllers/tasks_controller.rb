@@ -8,16 +8,18 @@ class TasksController < ApplicationController
       @tasks = Task.sort_expired(:sort_expired)
     end
 
-    if params[:search].present?
-      @tasks = Task.where('name LIKE ?', "%#{params[:search]}%") 
-    end
-
-    if params[:status].present?
-      @tasks = Task.where(status: params[:status]) 
-    end
-
     if params[:sort_priority].present?
       @tasks = Task.sort_priority(:sort_priority)
+    end
+
+    if params[:task].present?
+      if params[:task][:search].present? && params[:task][:status].present?
+        @tasks = Task.where(status: params[:task][:status])
+      elsif params[:task][:search].present?
+        @tasks = Task.where('name LIKE ?', "%#{params[:task][:search]}%") 
+      elsif params[:task][:status].present?
+        @tasks = Task.where(status: params[:task][:status])
+      end
     end
     
   end
@@ -49,7 +51,6 @@ class TasksController < ApplicationController
     task.update!(task_params)
     redirect_to tasks_url, notice: "タスク「#{task.name}を更新しました」"
   end
-
   def destroy
     task = Task.find(params[:id])
     task.destroy
@@ -58,11 +59,18 @@ class TasksController < ApplicationController
 
   private
   def task_params
+
     params.require(:task).permit(:name, :description, :expired_at, :status, :priority)
   end
 
-  # def sort_params
-  #   params.permit(:sort_expired)
-  # end
-
 end
+
+# if params[:task].present?
+#   @tasks = Task.all.order(id: :asc)
+# elsif params[:search].present?
+#   @tasks = Task.where('name LIKE ?', "%#{params[:search]}%") 
+# elsif params[:status].present?
+#   @tasks = Task.where(status: params[:task][:status])
+# else
+#   @tasks = Task.all.order(id: :desc)
+# end

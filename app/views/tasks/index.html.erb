@@ -1,7 +1,7 @@
 <h1>タスク一覧</h1>
 
 
-<%= form_with url: tasks_path, method: :get, local: true do |form| %>
+<%= form_with url: tasks_path, scope: :task, method: :get, local: true do |form| %>
   <div class='form-group', class='row'>
     <%= form.label :name_cont, '検索ボックス', class: 'col-sm2 col-form-label' %>
     <%= form.text_field :search, class: 'form-control' %>
@@ -11,7 +11,7 @@
 
 <br>
 
-<%= form_with url: tasks_path, method: :get, local: true do |form| %>
+<%= form_with url: tasks_path, scope: :task, method: :get, local: true do |form| %>
   <div class='form-group', class='row'>
     <%= form.select :status, Task.statuses.keys, class: 'form-control' %>
     <%= form.submit 'ステータス検索', name: nil, class: 'btn btn-outline-primary' %>
