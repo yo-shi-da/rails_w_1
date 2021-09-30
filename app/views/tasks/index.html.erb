@@ -5,22 +5,21 @@
   <div class='form-group', class='row'>
     <%= form.label :name_cont, '検索ボックス', class: 'col-sm2 col-form-label' %>
     <%= form.text_field :search, class: 'form-control' %>
-    <%= form.submit '検索', name: nil, class: 'btn btn-outline-primary' %>
+    <%= form.submit '検索', class: 'btn btn-outline-primary' %>
   </div>
 <% end %>
 
 <br>
 
-<%
-=begin%>
- <%= form_with model: @hoge do |f| %>
-  <%= f.select :task, options_for_select(Task.status), {prompt: "選択してください"} %>
-  <%= f.submit '送信'%>
-<% end %> 
-<%
-=end%>
+<%= form_with(model: @task, url: tasks_path, local: true, class: "form-row") do |f| %>
+    <%= f.select :status, Task.statuses.keys, class:"form-control"  %>
+    <%= f.submit "ステータス検索" %>
+<% end %>
+
+<br>
 
 <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true"), class:"btn btn-primary" %>
+<%= link_to "優先順位でソートする", tasks_path(sort_priority: "true"), class:"btn btn-primary" %>
 
 <div class="mb-3">
 <table class="table table-hover">

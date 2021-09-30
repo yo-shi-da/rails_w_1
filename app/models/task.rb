@@ -1,7 +1,8 @@
 class Task < ApplicationRecord
     validates :name, presence: true
 
-    scope :sort_tasks, -> (sort) { order(expired_at: :desc) }
+    scope :sort_expired, -> (sort) { order(expired_at: :desc) }
+    scope :sort_priority, -> (sort) { order(priority: :asc) }
 
     enum status: {
         未着手: 1, 
