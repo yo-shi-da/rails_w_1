@@ -13,7 +13,7 @@
 <br>
 
 <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true"), class:"btn btn-outline-primary", id:"sort_expired" %>
-<%= link_to "優先順位でソートする", tasks_path(sort_priority: "true"), class:"btn btn-outline-primary" %>
+<%= link_to "優先順位でソートする", tasks_path(sort_priority: "true"), class:"btn btn-outline-primary", id:"sort_priority" %>
 
 <div class="mb-3">
 <table class="table table-hover">
@@ -36,7 +36,7 @@
         <td><%= task.id %></td>
         <td><%= task.name %></td>
         <td><%= task.description %></td>
-        <td><%= task.expired_at.strftime("%Y年%m月%d日") %></td>
+        <td><%= task.expired_at.strftime("%Y年%m月%d日") if task.expired_at.present? %></td>
         <td><%= task.created_at.strftime("%Y年%m月%d日") %></td>
         <td><%= task.status %></td>
         <td><%= task.priority %></td>
