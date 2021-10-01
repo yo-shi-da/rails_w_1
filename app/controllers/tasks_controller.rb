@@ -2,7 +2,7 @@ class TasksController < ApplicationController
 
   def index
     
-    @tasks = Task.all.order(id: :asc)
+    @tasks = Task.all.order(id: :asc).page(params[:page]).per(5)
 
     if params[:sort_expired].present?
       @tasks = Task.sort_expired(:sort_expired)
