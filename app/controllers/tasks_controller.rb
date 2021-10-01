@@ -5,23 +5,22 @@ class TasksController < ApplicationController
     @tasks = Task.all.order(id: :asc).page(params[:page]).per(5)
 
     if params[:sort_expired].present?
-      @tasks = Task.sort_expired(:sort_expired)
+      @tasks = Task.sort_expired(:sort_expired).page(params[:page]).per(5)
     end
 
     if params[:sort_priority].present?
-      @tasks = Task.sort_priority(:sort_priority)
-    end
-    
+      @tasks = Task.sort_priority(:sort_priority).page(params[:page]).per(5)
+    end    
     
     if params[:task].present?
       @task_search = params[:task][:search]
       @task_status = params[:task][:status]
       if params[:task][:search].present? && params[:task][:status].present?
-        @tasks = Task.and_sort(@task_search, @task_status)
+        @tasks = Task.and_sort(@task_search, @task_status).page(params[:page]).per(5)
       elsif params[:task][:search].present?
-        @tasks = Task.search_sort(@task_search)
+        @tasks = Task.search_sort(@task_search).page(params[:page]).per(5)
       elsif params[:task][:status].present?
-        @tasks = Task.status_sort(@task_status)
+        @tasks = Task.status_sort(@task_status).page(params[:page]).per(5)
       end
     end
     
