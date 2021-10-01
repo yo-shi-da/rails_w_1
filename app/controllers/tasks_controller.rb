@@ -11,14 +11,17 @@ class TasksController < ApplicationController
     if params[:sort_priority].present?
       @tasks = Task.sort_priority(:sort_priority)
     end
-
+    
+    
     if params[:task].present?
+      @task_search = params[:task][:search]
+      @task_status = params[:task][:status]
       if params[:task][:search].present? && params[:task][:status].present?
-        @tasks = Task.where(status: params[:task][:status])
+        @tasks = Task.and_sort(@task_search, @task_status)
       elsif params[:task][:search].present?
-        @tasks = Task.where('name LIKE ?', "%#{params[:task][:search]}%") 
+        @tasks = Task.search_sort(@task_search)
       elsif params[:task][:status].present?
-        @tasks = Task.where(status: params[:task][:status])
+        @tasks = Task.status_sort(@task_status)
       end
     end
     
