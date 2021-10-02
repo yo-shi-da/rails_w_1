@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 	helper_method :current_user
 	before_action :login_required
-	include SessionsHelperｓ
+	include SessionsHelper
 
 	private
 
