@@ -1,4 +1,4 @@
-<h1>タスク一覧</h1>
+<h1><%= "「#{current_user.name}」のタスク一覧" %></h1>
 
 
 <%= form_with url: tasks_path, scope: :task, method: :get, local: true do |form| %>
@@ -31,6 +31,9 @@
       <th>Created_at(登録日時）</th>
       <th>Status(ステータス)</th>
       <th>Priority(優先度)</th>
+      <th></th>
+      <th></th>
+      <th></th>
       <th></th>
     </tr>
   </thead>
