@@ -5,6 +5,7 @@ FactoryBot.define do
     expired_at { '002021-01-01' }
     status { '未着手' }
     priority { '中' }
-    # expired_at { ' test_expired_at ' } #これでもテスクをクリアする。
+    user
+    # expired_at { 'test_expired_at' } #これでもテスクをクリアする。
   end
 end

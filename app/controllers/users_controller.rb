@@ -12,8 +12,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = 'アカウントを作成しました!!!こちらのページからログインして下さい！'
-      redirect_to user_path(@user.id)
+      log_in @user
+      flash[:notice] = 'アカウントを作成しました。ログインしております。'
+      redirect_to tasks_path
     else
       render :new
     end

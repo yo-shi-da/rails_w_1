@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'タスク管理機能', type: :system do
 
-  # # OK
+  # OK
   describe '新規作成機能' do
     context 'タスクを新規作成し、一覧画面に移動した場合' do
       it 'リンク押すと終了期限の降順に並び替えられる' do
@@ -47,7 +47,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       FactoryBot.create(:task, name: "sample2", status: "未着手")
     end
 
-    # NG そもそもタスクがない。よって、「before」等でタスクを作成する。また、テストなので3つ以上必要。
+    # OK そもそもタスクがない。よって、「before」等でタスクを作成する。また、テストなので3つ以上必要。
     context 'タイトルであいまい検索をした場合' do
       it "検索キーワードを含むタスクで絞り込まれる" do
         visit tasks_path
@@ -62,31 +62,27 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
 
-    # # OK
+    # OK
     context 'ステータス検索をした場合' do
       it "ステータスに完全一致するタスクが絞り込まれる" do
-        # ここに実装する
         visit tasks_path
-        # プルダウンを選択する「select」について調べてみること
         select '完了', from: 'task_status'
         click_on '検索'
         expect(page).to have_content '完了'
       end
     end
 
-    # # OK
+    # OK
     context 'タイトルのあいまい検索とステータス検索をした場合' do
       it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
-        # ここに実装する
         visit tasks_path
-        # タスクの検索欄に検索ワードを入力する (例: task)
         fill_in 'task_search', with: 'task'
         select '完了', from: 'task_status'
         click_on '検索'
         expect(page).to have_content '完了' and have_content 'task'
       end
     end
-    # 
+
   end
 
   describe '一覧表示機能' do
@@ -120,4 +116,5 @@ RSpec.describe 'タスク管理機能', type: :system do
      end
   
   end
+
 end

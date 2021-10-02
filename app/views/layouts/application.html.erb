@@ -17,10 +17,14 @@
           <ul class="navbar-nav ml-auto">
             <% if current_user %>
               <li class="nav-item"><%= link_to "task一覧", tasks_path, class:"nav-link" %></li>
+
               <% if current_user.admin? %>
                 <li class="nav-item"><%= link_to "ユーザー一覧", admin_users_path, class:"nav-link" %></li>
+              <% else %>
+                <li class="nav-item"><%= link_to "ユーザー一覧", tasks_path, data: { confirm: '管理者以外アクセス不可です。' }, class:"nav-link" %></li>
               <% end %>
-              <li class="nav-item"><%= link_to "ログアウト", logout_path, method: :delete, class:"nav-link" %></li>
+
+              <li class="nav-item"><%= link_to "ログアウト", logout_path, method: :delete, data: { confirm: '本当にログアウトしますか?' }, class:"nav-link" %></li>
             <% else %>
               <li class="nav-item"><%= link_to "サインアップ", new_user_path, class:"nav-link" %></li>
               <li class="nav-item"><%= link_to "ログイン", login_path, class:"nav-link" %></li>

@@ -1,5 +1,5 @@
 addresses = [ 
-    "a@com.jp", "b@com.jp", "c@com.jp", "d@com.jp", "e@com.jp"
+    "a@com.jp", "b@com.jp", "c@com.jp"
 ]
 
 # 各ユーザーの作成
