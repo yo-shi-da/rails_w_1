@@ -2,6 +2,23 @@ require "rails_helper"
 
 describe 'ユーザー機能', type: :system do
 
+	# OK
+	describe '管理画面テスト' do
+		context '管理ユーザは管理画面にアクセスしたとき' do			
+			it 'アクセスできること' do
+				FactoryBot.create(:user, name: "ユーザーA", email: "a@example.com", password: "password", password_confirmation: "password")
+				visit login_path
+				fill_in :session_email, with: 'a@example.com'
+				fill_in :session_password, with: 'password'
+				click_button 'ログインする'
+				click_on 'ログアウト'
+				page.driver.browser.switch_to.alert.accept
+				expect(page).to have_content 'ログアウトしました。'
+				# binding.pry
+			end
+		end
+	end
+
 	# # OK
 	# describe 'セッション機能テスト' do
 	# 	context 'ログアウトしたとき' do			

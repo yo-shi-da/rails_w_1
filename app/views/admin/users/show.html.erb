@@ -36,5 +36,50 @@
 <td><%= link_to '編集', edit_admin_user_path, class: 'btn btn-primary mr-3' %></td>
 <td><%= link_to '削除', [:admin, @user], method: :delete, data: { confirm: "ユーザ「#{@user.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger' %></td>
 <td><%= link_to '一覧', admin_users_path, class: 'btn btn-primary mr-3' %></td>
+<hr>
+<h2><%= "「#{@user.name}」のタスク一覧" %></h2>
+
+ <div class="mb-3">
+  <%= paginate @tasks %>
+  <%= page_entries_info @tasks %>
+</div>
+
+<div class="mb-3">
+<table class="table table-hover">
+  <thead class="thead-default">
+    <tr>
+      <th>No(sequence number)</th>
+      <th>Name(名前)</th>
+      <th>Description（詳細）</th>
+      <th>Expired_at（終了期限）</th>
+      <th>Created_at(登録日時）</th>
+      <th>Status(ステータス)</th>
+      <th>Priority(優先度)</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= task.expired_at.strftime("%Y年%m月%d日") if task.expired_at.present? %></td>
+        <td><%= task.created_at.strftime("%Y年%m月%d日") %></td>
+        <td><%= task.status %></td>
+        <td><%= task.priority %></td>
+        <td></td>
+        <td><%= link_to '詳細', task, class:"btn btn-outline-primary" %></td>
+        <td><%= link_to '編集', edit_task_path(task), class:"btn btn-outline-success" %></td>
+        <td><%= link_to '削除', task, class:"btn btn-outline-danger", method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
 
 
