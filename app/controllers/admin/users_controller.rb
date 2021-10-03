@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :require_admin
 
   def index
-    @users = User.all
+    @users = User.all.order(id: :asc)
   end
 
   def show
@@ -27,21 +27,24 @@ class Admin::UsersController < ApplicationController
       render :new
     end
   end
-
+  
   def update
     @user = User.find(params[:id])
-
+    
     if @user.update(user_params)
       redirect_to admin_user_path(@user), notice: "ユーザ「#{@user.name}」を更新しました。"
-    else
-      render :new
+    else      
+      redirect_to tasks_path, notice: '少なくとも1つ、管理者が必要になります。2つ以上ないとこの操作は行えません。'
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-    redirect_to admin_users_url, notice: "ユーザ「#{@user.name}」を削除しました。"
+    @user = User.find(params[:id])    
+    if @user.destroy
+      redirect_to admin_users_url, notice: "ユーザ「#{@user.name}」を削除しました。"      
+    else      
+      redirect_to tasks_path, notice: '少なくとも1つ、管理者が必要になります。2つ以上ないとこの操作は行えません。'
+    end
   end
 
   private
@@ -50,7 +53,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def require_admin
-    respond_to root_url unless current_user.admin?
+    redirect_to root_path unless current_user.admin?
   end
 
 end

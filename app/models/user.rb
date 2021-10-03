@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-	before_update :set_admin_check
-	before_destroy :set_admin_check
+	before_update :admin_check_update
+	before_destroy :admin_check_destroy
 
 	has_secure_password
 
@@ -11,10 +11,22 @@ class User < ApplicationRecord
 
 	private
 
-	# def :set_admin_check
-	# 	@admin = User.all
-	# 	if 
-	# 	else
-	# 	end
-	# end
+	def admin_check_update
+		@user = User.where(admin: true)
+		# binding.pry
+		if @user.count == 1
+			self.admin = true
+			# throw :abort
+		end
+	end
+
+	def admin_check_destroy
+		@user = User.where(admin: true)
+		# binding.pry
+		if @user.count == 1
+			# self.admin = true
+			throw :abort
+		end
+	end
+
 end
