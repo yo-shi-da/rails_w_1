@@ -1,4 +1,7 @@
 class Task < ApplicationRecord
+    has_many :labellings, dependent: :destroy
+    has_many :labels_task, through: :labellings, source: :label
+    
     validates :name, presence: true
     belongs_to :user
 

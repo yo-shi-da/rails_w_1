@@ -55,6 +55,7 @@
       <th>Created_at(登録日時）</th>
       <th>Status(ステータス)</th>
       <th>Priority(優先度)</th>
+      <th>User(作成者)</th>
       <th></th>
       <th></th>
       <th></th>
@@ -72,6 +73,7 @@
         <td><%= task.created_at.strftime("%Y年%m月%d日") %></td>
         <td><%= task.status %></td>
         <td><%= task.priority %></td>
+        <td><%= task.user.name %></td>
         <td></td>
         <td><%= link_to '詳細', task, class:"btn btn-outline-primary" %></td>
         <td><%= link_to '編集', edit_task_path(task), class:"btn btn-outline-success" %></td>

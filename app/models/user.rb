@@ -16,10 +16,10 @@ class User < ApplicationRecord
 	# ということは、一般ユーザー（admin=false）は、ユーザー編集できず、編集可能は管理者（admin=true）ユーザーのみ。
   def admin_check_update
 		@user = User.where(admin: true)
-    if @user.count == 1 && self.admin == false
-      throw :abort
-    end
-  end
+		if @user.count == 1 && self.admin == false
+			throw :abort
+		end
+	end
 
 	def admin_check_destroy
 		@user = User.where(admin: true)
