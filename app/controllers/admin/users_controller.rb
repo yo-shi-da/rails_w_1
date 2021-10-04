@@ -34,7 +34,7 @@ class Admin::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to admin_user_path(@user), notice: "ユーザ「#{@user.name}」を更新しました。"
     else      
-      redirect_to tasks_path, notice: '少なくとも1つ、管理者が必要になります。2つ以上ないとこの操作は行えません。'
+      redirect_to tasks_path, notice: '少なくとも1つ、管理者が必要になりますので、この操作は行えません。'
     end
   end
 
@@ -43,7 +43,7 @@ class Admin::UsersController < ApplicationController
     if @user.destroy
       redirect_to admin_users_url, notice: "ユーザ「#{@user.name}」を削除しました。"      
     else      
-      redirect_to tasks_path, notice: '少なくとも1つ、管理者が必要になります。2つ以上ないとこの操作は行えません。'
+      redirect_to tasks_path, notice: '少なくとも1つ、管理者が必要になりますので、この操作は行えません。'
     end
   end
 
