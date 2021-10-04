@@ -11,13 +11,35 @@
   </head>
 
   <body>
-    <div class="app-title navbar navbar-expand-md navbar-light bg-light"></div>
-    <div class="navbar-brand"></div>
-    <div class="container"></div>
-    
+    <div class="app-title navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+      <div class="navbar-brand">
+        <div class="container">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><%= link_to "task一覧", tasks_path, class:"nav-link" %></li>
+            <% if current_user %>
+
+              <% if current_user.admin? %>
+                <li class="nav-item"><%= link_to "管理", admin_users_path, class:"nav-link" %></li>
+              <% else %>
+                <li class="nav-item"><%= link_to "管理", tasks_path, data: { confirm: '管理者以外アクセス不可です。' }, class:"nav-link" %></li>
+              <% end %>
+
+              <li class="nav-item"><%= link_to "Mypage", user_path(current_user.id), class:"nav-link" %></li>
+              <li class="nav-item"><%= link_to "ログアウト", logout_path, method: :delete, data: { confirm: '本当にログアウトしますか?' }, class:"nav-link" %></li>
+            <% else %>
+              <li class="nav-item"><%= link_to "サインアップ", new_user_path, class:"nav-link" %></li>
+              <li class="nav-item"><%= link_to "ログイン", login_path, class:"nav-link" %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <% if flash.notice.present? %>
       <p class="alert alert-success" role="alert"><%= flash.notice %></p>
   　<% end %>
+
     <%= yield %>
+
   </body>
 </html>

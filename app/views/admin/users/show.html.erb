@@ -1,21 +1,45 @@
-<h1><%= "「#{current_user.name}」のタスク一覧" %></h1>
+<h1>ユーザー詳細</h1>
 
+<div class="nav justify-content-end">
+  <%= link_to '一覧', admin_users_path, class:"nav-link" %>
+</div>
 
-<%= form_with url: tasks_path, scope: :task, method: :get, local: true do |form| %>
-  <div class='form-group', class='row'>
-    <%= form.label :name_cont, '検索ボックス', class: 'col-sm2 col-form-label' %>
-    <%= form.text_field :search, class: 'form-control' %>
-    <%= form.select :status, Task.statuses.keys, class: 'form-control' %>
-  </div>
-    <%= form.submit '検索', name: nil, class: 'btn btn-outline-primary' %>
-<% end %>
+<table class="table table-hover">
+	<tbody>
+    <tr>
+      <th>No(sequence number)</th>
+			<td><%= @user.id %></td>
+		</tr>
+		<tr>
+      <th>Name(名前)</th>
+			<td><%= @user.name %></td>
+		</tr>
+		<tr>
+      <th>Email（メールアドレス）</th>
+			<td><%= @user.email %></td>
+		</tr>
+		<tr>
+      <th>Admin（管理者権限）</th>
+			<td><%= @user.admin? ? 'あり' : 'なし' %></td>
+		</tr>
+		<tr>
+      <th>Created_at(登録日時）</th>
+			<td><%= @user.created_at %></td>
+		</tr>
+		<tr>
+      <th>Updated_at(更新日時）</th>
+			<td><%= @user.updated_at %></td>
+		</tr>
+  </tbody>
+</table>
 
-<br>
+<td><%= link_to '編集', edit_admin_user_path, class: 'btn btn-primary mr-3' %></td>
+<td><%= link_to '削除', [:admin, @user], method: :delete, data: { confirm: "ユーザ「#{@user.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger' %></td>
+<td><%= link_to '一覧', admin_users_path, class: 'btn btn-primary mr-3' %></td>
+<hr>
+<h2><%= "「#{@user.name}」のタスク一覧" %></h2>
 
-<%= link_to "終了期限でソートする", tasks_path(sort_expired: "true"), class:"btn btn-outline-primary", id:"sort_expired" %>
-<%= link_to "優先順位でソートする", tasks_path(sort_priority: "true"), class:"btn btn-outline-primary", id:"sort_priority" %>
-
-<div class="mb-3">
+ <div class="mb-3">
   <%= paginate @tasks %>
   <%= page_entries_info @tasks %>
 </div>
@@ -58,6 +82,4 @@
 </table>
 </div>
 
-<br>
 
-<%= link_to '新規作成', new_task_path, class:"btn btn-primary" %>
