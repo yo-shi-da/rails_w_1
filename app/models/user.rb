@@ -21,6 +21,7 @@ class User < ApplicationRecord
 	# if @user.count == 1 && self.admin == true
 	# throw :abort
 	# self.admin = false
+	# binding.pry
 
 	def admin_check_destroy
 		@user = User.where(admin: true)
@@ -28,6 +29,5 @@ class User < ApplicationRecord
 			throw :abort			
 		end
 	end
-	# binding.pry
 
 end
