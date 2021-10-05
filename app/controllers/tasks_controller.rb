@@ -13,19 +13,25 @@ class TasksController < ApplicationController
     end    
     
     if params[:task].present?
-      @task_search = params[:task][:search]
-      @task_status = params[:task][:status]
+    # binding.pry
+    @task_search = params[:task][:search]
+    @task_status = params[:task][:status]
       if params[:task][:search].present? && params[:task][:status].present?
-        @tasks = current_user.tasks.and_sort(@task_search, @task_status).page(params[:page]).per(5)
+      @tasks = current_user.tasks.and_sort(@task_search, @task_status).page(params[:page]).per(5)
+      elsif params[:task][:label_id].present?
+        @tasks1 = Labelling.where(label_id: params[:task][:label_id]).pluck(:task_id)
+        @tasks = Task.where(id: @tasks1).page(params[:page]).per(5)
       elsif params[:task][:search].present?
         @tasks = current_user.tasks.search_sort(@task_search).page(params[:page]).per(5)
       elsif params[:task][:status].present?
         @tasks = current_user.tasks.status_sort(@task_status).page(params[:page]).per(5)
+      else
+        @tasks = current_user.tasks.all.includes(:user).page(params[:page]).per(5)
       end
     end
-    
-  end
 
+  end
+    
   def show
     @task = current_user.tasks.find(params[:id])
     # binding.pry

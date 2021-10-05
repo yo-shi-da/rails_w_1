@@ -14,6 +14,7 @@ class Task < ApplicationRecord
     scope :and_sort, -> (search_sort, status_sort) { where('name LIKE ?', "%#{search_sort}%").where(status: status_sort) }
 
     enum status: {
+        " ": 0,
         未着手: 1, 
         着手中: 2, 
         完了: 3
