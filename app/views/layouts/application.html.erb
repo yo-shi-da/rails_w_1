@@ -25,6 +25,7 @@
               <% end %>
 
               <li class="nav-item"><%= link_to "Mypage", user_path(current_user.id), class:"nav-link" %></li>
+              <li class="nav-item"><%= link_to "label", labels_path, class:"nav-link" %></li>
               <li class="nav-item"><%= link_to "ログアウト", logout_path, method: :delete, data: { confirm: '本当にログアウトしますか?' }, class:"nav-link" %></li>
             <% else %>
               <li class="nav-item"><%= link_to "サインアップ", new_user_path, class:"nav-link" %></li>

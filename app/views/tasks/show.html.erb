@@ -28,5 +28,14 @@
   <%= @task.priority %>
 </p>
 
-<%= link_to '編集', edit_task_path(@task), class:"btn btn-primary" %> 
-<%= link_to '戻る', tasks_path, class:"btn btn-primary" %>
+<p>
+  <strong>Label一覧:</strong>
+  <% if @task.labels.present?  %>
+    <%= @task.labels.pluck(:name) %>
+  <% else %>
+    Labelは登録されていません。
+  <% end %>
+</p>
+
+<%= link_to '編集', edit_task_path(@task), class:"btn btn-outline-info" %> 
+<%= link_to '戻る', tasks_path, class:"btn btn-outline-info" %>
