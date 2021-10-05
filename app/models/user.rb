@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
 	# このコードで良い。管理者しかユーザー変更はできない。よって、管理者以外（admin=false）は編集ができない。
 	# ということは、一般ユーザー（admin=false）は、ユーザー編集できず、編集可能は管理者（admin=true）ユーザーのみ。
+	# <div class="app-title navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
   def admin_check_update
 		@user = User.where(admin: true)
 		if @user.count == 1 && self.admin == false

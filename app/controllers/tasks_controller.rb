@@ -28,6 +28,7 @@ class TasksController < ApplicationController
 
   def show
     @task = current_user.tasks.find(params[:id])
+    # binding.pry
   end
 
   def new
@@ -61,9 +62,9 @@ class TasksController < ApplicationController
   end
 
   private
-  def task_params
 
-    params.require(:task).permit(:name, :description, :expired_at, :status, :priority)
+  def task_params
+    params.require(:task).permit(:name, :description, :expired_at, :status, :priority, {label_ids: []})
   end
 
 end

@@ -1,6 +1,7 @@
 class Task < ApplicationRecord
     has_many :labellings, dependent: :destroy
-    has_many :labels_task, through: :labellings, source: :label
+    # has_many :labels_task(この名前だとParametersで拒否される), through: :labellings, source: :label
+    has_many :labels, through: :labellings
     
     validates :name, presence: true
     belongs_to :user

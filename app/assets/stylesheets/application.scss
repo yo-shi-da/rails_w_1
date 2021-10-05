@@ -16,11 +16,15 @@
 
 body {
 	color: darkgray;
-	font-size:18px;
+	font-size: 18px;
 	background-size: cover;
 }
 
 hr {
 	height: 4px;
 	background-color: blue;
+}
+
+.nav-item :hover {
+	background-color: #ffc9d7;
 }
